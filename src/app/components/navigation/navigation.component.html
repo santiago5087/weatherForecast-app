@@ -6,8 +6,8 @@
            [formControl]="myControl"
            [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="selectedOption($event)">
-        {{option}}
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.name" (click)="selectedOption()">
+        {{ option.name }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>

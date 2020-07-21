@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 import { SearchService } from '../../services/search.service';
-import { rejects } from 'assert';
+import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-navigation',
@@ -17,7 +16,7 @@ export class NavigationComponent implements OnInit {
   // options: Observable<string[]>;
   myControl = new FormControl();
   subscription: Subscription;
-  filteredOptions: string[] = [];
+  filteredOptions: Place[] = [];
 
   constructor(private searchService: SearchService) { }
 
@@ -31,14 +30,23 @@ export class NavigationComponent implements OnInit {
     this.searchService.search(filterName)
       .subscribe(
         res => {
-          this.filteredOptions = res.features.map(feature => feature.place_name);
+          this.filteredOptions = res.features.map(feature => {
+            let featuredPlace: Place = {
+              name: feature.place_name,
+              lat: feature.center[1],
+              long: feature.center[0]
+            }
+
+            return featuredPlace;
+          });
           console.log(res);
           },
         err => console.log(err));
   }
 
-  selectedOption($event) {
-    console.log($event);
+  selectedOption() {
+    let so: Place = this.filteredOptions.filter(place => place.name === this.myControl.value)[0];
+    console.log("Selected option", so);
   }
 
 }
