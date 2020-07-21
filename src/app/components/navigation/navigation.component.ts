@@ -1,5 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 import { SearchService } from '../../services/search.service';
+import { rejects } from 'assert';
 
 @Component({
   selector: 'app-navigation',
@@ -8,19 +13,32 @@ import { SearchService } from '../../services/search.service';
 })
 export class NavigationComponent implements OnInit {
 
-  locationName: string = "";
+  // locationName = new FormControl();
+  // options: Observable<string[]>;
+  myControl = new FormControl();
+  subscription: Subscription;
+  filteredOptions: string[] = [];
 
   constructor(private searchService: SearchService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.subscription = this.myControl.valueChanges
+      .subscribe(value => this.search(value));
   }
 
-  search(event: KeyboardEvent): void {
-    this.searchService.search(this.locationName)
+  search(name: string): void {
+    let filterName = name.toLowerCase();
+    this.searchService.search(filterName)
       .subscribe(
-        res => console.log(res), 
+        res => {
+          this.filteredOptions = res.features.map(feature => feature.place_name);
+          console.log(res);
+          },
         err => console.log(err));
   }
 
+  selectedOption($event) {
+    console.log($event);
+  }
 
 }
