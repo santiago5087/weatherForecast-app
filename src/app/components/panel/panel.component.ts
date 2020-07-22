@@ -15,7 +15,7 @@ export class PanelComponent implements OnInit, OnDestroy {
   dailyWeather: any[] = [];
   hourlyWeather: any[] = [];
 
-  constructor(private weatherService: WeatherService) { }
+  constructor(public weatherService: WeatherService) { }
 
   ngOnInit(): void {
     this.subscription = this.weatherService.getWeather().subscribe(weather => { 
@@ -26,6 +26,7 @@ export class PanelComponent implements OnInit, OnDestroy {
       for (let i=0; i < weather.hourly.length; i++) {
         if (i % 4 == 0) this.hourlyWeather.push(weather.hourly[i]);
       } 
+      console.log("current weather:", this.currentWeather);
     });
   }
 

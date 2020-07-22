@@ -1,10 +1,18 @@
 <div class="container">
-  <div *ngIf="currentWeather" class="actual-weather" fxLayoutAlign="center center">
-    <i fxFlex style="text-align: right;">Icon</i>
-    <div fxFlex>
-      <p>{{ currentWeather.temp }} {{ currentWeather.weather[0].main }}</p>
-      <p>{{ currentWeather.weather[0].description }}</p>
-      <p>Feels like: {{ currentWeather.feels_like }}</p>
+  <div *ngIf="currentWeather" class="current-weather" fxLayoutAlign="center center">
+    <div fxFlex style="text-align: right;">
+      <img [src]="weatherService.getIconUrl(currentWeather.weather[0].icon, '4x')">
     </div>
+    <div fxFlex>
+      <div style="text-align: center; display: inline-block;">
+        <h3>{{ currentWeather.temp }}°C {{ currentWeather.weather[0].main }}</h3>
+        <p>{{ currentWeather.weather[0].description }}</p>
+        <p>Feels like: {{ currentWeather.feels_like }}°C</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="hourlyWeather" class="hourly-weather" fxLayoutAlign="center center">
+    
   </div>
 </div>
