@@ -1,1 +1,10 @@
-<p>panel works!</p>
+<div class="container">
+  <div *ngIf="currentWeather" class="actual-weather" fxLayoutAlign="center center">
+    <i fxFlex style="text-align: right;">Icon</i>
+    <div fxFlex>
+      <p>{{ currentWeather.temp }} {{ currentWeather.weather[0].main }}</p>
+      <p>{{ currentWeather.weather[0].description }}</p>
+      <p>Feels like: {{ currentWeather.feels_like }}</p>
+    </div>
+  </div>
+</div>
