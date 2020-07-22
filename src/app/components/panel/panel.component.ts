@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-panel',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelComponent implements OnInit {
 
-  constructor() { }
+  weatherInfo: any = undefined;
+  subscription: Subscription;
+
+  constructor(private weatherService: WeatherService) { }
 
   ngOnInit(): void {
+    this.subscription = this.weatherService.getWeather().subscribe(weather => { this.weatherInfo = weather; console.log("weather from panel!", this.weatherInfo) });
   }
 
 }
