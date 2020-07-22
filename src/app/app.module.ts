@@ -11,11 +11,13 @@ import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { PanelComponent } from './components/panel/panel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+    NavigationComponent,
+    PanelComponent
   ],
   imports: [
     BrowserModule,

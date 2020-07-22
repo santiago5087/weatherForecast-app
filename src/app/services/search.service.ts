@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   search(name: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl + name}.json?types=place&access_token=${this.accessToken}`)
+    return this.http.get<any>(`${this.baseUrl + name}.json?types=place&access_token=${this.accessToken}`);
   }
 
 }

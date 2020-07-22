@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 
 import { SearchService } from '../../services/search.service';
+import { WeatherService } from '../../services/weather.service';
 import { Place } from '../../models/place';
 
 @Component({
@@ -12,13 +13,12 @@ import { Place } from '../../models/place';
 })
 export class NavigationComponent implements OnInit {
 
-  // locationName = new FormControl();
-  // options: Observable<string[]>;
   myControl = new FormControl();
   subscription: Subscription;
   filteredOptions: Place[] = [];
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService,
+    private weatherService: WeatherService) { }
 
   ngOnInit() {
     this.subscription = this.myControl.valueChanges
@@ -45,8 +45,8 @@ export class NavigationComponent implements OnInit {
   }
 
   selectedOption() {
-    let so: Place = this.filteredOptions.filter(place => place.name === this.myControl.value)[0];
-    console.log("Selected option", so);
+    let selectedOption: Place = this.filteredOptions.filter(place => place.name === this.myControl.value)[0];
+    this.weatherService.getActualWeather(selectedOption.lat, selectedOption.long);
   }
 
 }
