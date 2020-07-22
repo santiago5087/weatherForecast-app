@@ -1,10 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-<form  class="example-form" (ngSubmit)="selectedOption()" style="width: 100%;">
+<div fxLayout="row" fxLayoutAlign="center center" class="container">
+<form fxFlex class="search-form" (ngSubmit)="selectedOption()" style="width: 100%;">
   <span class="main-title">Weather Forecast</span>
 
-  <mat-form-field class="">
+  <mat-form-field style="width: 30%;" appearance="standard">
+    <mat-label>Select a place</mat-label>
     <input type="text"
-           placeholder="Select a place"
            matInput
            [formControl]="myControl"
            [matAutocomplete]="auto">
@@ -15,6 +15,9 @@
     </mat-autocomplete>
   </mat-form-field>
 
-  <button type="submit" class="fas fa-search-location fa-lg"></button>
+  <button mat-icon-button type="submit" class="button-search">
+    <i class="fas fa-search-location fa-lg"></i>
+  </button>
 </form>
 </div>
+<mat-divider style="width: 100%;"></mat-divider>
