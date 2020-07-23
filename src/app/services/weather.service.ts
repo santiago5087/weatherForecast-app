@@ -10,7 +10,7 @@ import { Coordinate } from '../models/coordinate';
 export class WeatherService {
 
   private baseUrl = 'https://api.openweathermap.org/data/2.5/onecall';
-  private baseUrlIcon = 'http://openweathermap.org/img/wn/';
+  private baseUrlIcon = 'https://openweathermap.org/img/wn/';
   private appid = '19721b757935703546bc98b4bed29cf6';  
 
   constructor(private http: HttpClient) { }
