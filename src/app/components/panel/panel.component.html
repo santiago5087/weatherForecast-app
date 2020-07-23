@@ -1,15 +1,36 @@
 <div class="container">
-  <div *ngIf="currentWeather" class="current-weather" fxLayoutAlign="center center">
-    <div fxFlex style="text-align: right;">
-      <img [src]="weatherService.getIconUrl(currentWeather.weather[0].icon, '@4x')">
+  <div *ngIf="currentWeather" class="current-weather" fxLayout="column" fxLayoutAlign="center center">
+    <div fxLayout ="row wrap" fxLayoutAlign="space-between center" class="current-info">
+      <span fxFlex>
+        <span style="font-weight: 500;">Wind: </span>{{ currentWeather.wind_speed }} m/s
+      </span>
+      <span fxFlex>
+        <span style="font-weight: 500;">Humidity: </span>{{ currentWeather.humidity }}%
+      </span>
+      <span fxFlex>
+        <span style="font-weight: 500;">Pressure: </span>{{ currentWeather.pressure }} hPa
+      </span>
+      <span fxFlex>
+        <span style="font-weight: 500;">Visibility: </span>{{ currentWeather.visibility }} mts
+      </span>
+      <span fxFlex>
+        <span style="font-weight: 500;">UV Index: </span>{{ currentWeather.uvi }}
+      </span>
     </div>
-    <div fxFlex>
-      <div style="text-align: center; display: inline-block;">
-        <h3 style="font-weight: bold;">
-          {{ currentWeather.temp }}°C {{ currentWeather.weather[0].main }}
-        </h3>
-        <p style="font-style: italic;">{{ currentWeather.weather[0].description }}</p>
-        <p><span style="font-weight: bold;">Feels like: </span>{{ currentWeather.feels_like }}°C</p>
+
+    <div fxLayoutAlign="center center">
+      <div fxFlex style="text-align: right;">
+        <img [src]="weatherService.getIconUrl(currentWeather.weather[0].icon, '@4x')">
+      </div>
+  
+      <div fxFlex>
+        <div style="text-align: center; display: inline-block;">
+          <h3 style="font-weight: bold;">
+            {{ currentWeather.temp }}°C {{ currentWeather.weather[0].main }}
+          </h3>
+          <p style="font-style: italic;">{{ currentWeather.weather[0].description }}</p>
+          <p><span style="font-weight: bold;">Feels like: </span>{{ currentWeather.feels_like }}°C</p>
+        </div>
       </div>
     </div>
   </div>

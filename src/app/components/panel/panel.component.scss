@@ -7,6 +7,12 @@ $font-color: #0800A1;
   padding: 10px 20px;
 }
 
+.current-info {
+  width: 100%; 
+  text-align: center; 
+  margin-top: 15px;
+}
+
 .current-weather {
   background-color: $main-background;
   color: $font-color;
