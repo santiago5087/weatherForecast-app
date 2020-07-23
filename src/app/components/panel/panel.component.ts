@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { WeatherService } from '../../services/weather.service';
+import { Place } from '../../models/place';
 
 @Component({
   selector: 'app-panel',
@@ -26,10 +27,13 @@ export class PanelComponent implements OnInit, OnDestroy {
       for (let i=0; i < weather.hourly.length; i++) {
         if (i % 4 == 0) this.hourlyWeather.push(weather.hourly[i]);
       } 
-      console.log("hourly weather:", this.hourlyWeather);
+      
+      if (localStorage.getItem('coordinates')) {
+        let place: Place = JSON.parse(localStorage.getItem('coordinates'));
+        this.weatherService.getActualWeather(place.lat, place.long); 
+      }
     });
 
-    this.weatherService.getActualWeather(6.33194, -75.55806); //Usar localStorage para almecenar búsqueda previa del usuario
   }
   
   ngOnDestroy(): void {

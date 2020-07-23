@@ -19,6 +19,8 @@ export class WeatherService {
     this.http
       .get<any>(`${this.baseUrl}?lat=${lat}&lon=${long}&units=metric&exclude=minutely&appid=${this.appid}`)
       .subscribe(result => {
+        let coordinates = JSON.stringify({ lat, long });
+        localStorage.setItem('coordinates', coordinates);
         this.sendActualWeather(result);
       }, err => console.log(err));
   }
