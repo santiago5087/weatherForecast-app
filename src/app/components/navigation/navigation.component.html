@@ -8,6 +8,9 @@
            matInput
            [formControl]="myControl"
            [matAutocomplete]="auto">
+    <button mat-icon-button *ngIf="myControl.value" matSuffix (click)="myControl.patchValue('')">
+      <i class="fas fa-times"></i>
+    </button>
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let option of filteredOptions" [value]="option.name" (click)="selectedOption()">
         {{ option.name }}
