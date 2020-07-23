@@ -41,13 +41,13 @@
           <mat-chip selected="true" color="primary" class="chip">
             max: {{ daily.temp.max }}°C
           </mat-chip>
-          <mat-chip selected="true" color="primary" class="chip">
+          <mat-chip matTooltip="Pressure" selected="true" color="primary" class="chip">
             {{ daily.pressure }} hPa
           </mat-chip>
-          <mat-chip selected="true" color="primary" class="chip">
+          <mat-chip matTooltip="Humidity" selected="true" color="primary" class="chip">
             {{ daily.humidity }}%
           </mat-chip>
-          <mat-chip selected="true" color="primary" class="chip">
+          <mat-chip matTooltip="Wind speed" selected="true" color="primary" class="chip">
             {{ daily.wind_speed }} m/s
           </mat-chip>
         </mat-chip-list>
