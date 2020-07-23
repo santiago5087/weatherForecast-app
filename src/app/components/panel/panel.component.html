@@ -1,18 +1,57 @@
 <div class="container">
   <div *ngIf="currentWeather" class="current-weather" fxLayoutAlign="center center">
     <div fxFlex style="text-align: right;">
-      <img [src]="weatherService.getIconUrl(currentWeather.weather[0].icon, '4x')">
+      <img [src]="weatherService.getIconUrl(currentWeather.weather[0].icon, '@4x')">
     </div>
     <div fxFlex>
       <div style="text-align: center; display: inline-block;">
-        <h3>{{ currentWeather.temp }}°C {{ currentWeather.weather[0].main }}</h3>
-        <p>{{ currentWeather.weather[0].description }}</p>
-        <p>Feels like: {{ currentWeather.feels_like }}°C</p>
+        <h3 style="font-weight: bold;">
+          {{ currentWeather.temp }}°C {{ currentWeather.weather[0].main }}
+        </h3>
+        <p style="font-style: italic;">{{ currentWeather.weather[0].description }}</p>
+        <p><span style="font-weight: bold;">Feels like: </span>{{ currentWeather.feels_like }}°C</p>
       </div>
     </div>
   </div>
 
-  <div *ngIf="hourlyWeather" class="hourly-weather" fxLayoutAlign="center center">
-    
+  <div class="hourly-weather" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <mat-card *ngFor="let hourly of hourlyWeather" class="hourly-card">
+      <img mat-card-image [src]="weatherService.getIconUrl(hourly.weather[0].icon, '@2x')">
+      <mat-card-content>
+        <p>{{ hourly.temp }}°C</p>
+        <p>{{ unixToDate(hourly.dt) | date:'EEE' }}</p>
+        <p>{{ unixToDate(hourly.dt) | date:'h:mm a' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="daily-weather" fxLayout="row wrap" fxLayoutAlign="center center">
+    <mat-card *ngFor="let daily of dailyWeather" class="daily-card">
+      <img mat-card-image [src]="weatherService.getIconUrl(daily.weather[0].icon, '@4x')"
+        style="margin-bottom: 0;">
+      <mat-card-content style="text-align: center;">
+        <h3 style="font-weight: 600;">{{ unixToDate(daily.dt) | date:'EEEE' }}</h3>
+        <h5 style="font-style: italic;">{{ daily.weather[0].description }}</h5>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-chip-list>
+          <mat-chip selected="true" class="chip">
+            min: {{ daily.temp.min }}°C
+          </mat-chip>
+          <mat-chip selected="true" color="primary" class="chip">
+            max: {{ daily.temp.max }}°C
+          </mat-chip>
+          <mat-chip selected="true" color="primary" class="chip">
+            {{ daily.pressure }} hPa
+          </mat-chip>
+          <mat-chip selected="true" color="primary" class="chip">
+            {{ daily.humidity }}%
+          </mat-chip>
+          <mat-chip selected="true" color="primary" class="chip">
+            {{ daily.wind_speed }} m/s
+          </mat-chip>
+        </mat-chip-list>
+      </mat-card-actions>
+    </mat-card>
   </div>
 </div>

@@ -1,3 +1,40 @@
+$main-background: #B4D0FF;
+$secondary-background: #abc9f1;
+$font-color: #0800A1;
+
+.container {
+  background-color: $main-background;
+  padding: 10px 20px;
+}
+
 .current-weather {
-  
+  background-color: $main-background;
+  color: $font-color;
+}
+
+.hourly-card {
+  width: 50px;
+  margin: 10px;
+  color: $font-color;
+  background-color: $main-background;
+  img {
+    margin-top: 0px;
+    margin-bottom: 0px;
+  }
+  mat-card-content {
+    font-size: smaller;
+    text-align: center;
+  }
+}
+
+.daily-card {
+  max-width: 150px;
+  margin: 10px;
+  background-color: $secondary-background;
+  color: $font-color;
+}
+
+.chip {
+  padding: 5px 8px;
+  font-size: x-small;
 }

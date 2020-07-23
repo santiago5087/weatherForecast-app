@@ -24,7 +24,7 @@ export class WeatherService {
   }
 
   getIconUrl(icon: string, size: string): string {
-    return this.baseUrlIcon + icon + '@' + size + '.png';
+    return this.baseUrlIcon + icon + size + '.png';
   }
 
   getWeather(): Observable<any> {
