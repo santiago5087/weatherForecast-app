@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
+import { Coordinate } from '../models/coordinate';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +21,8 @@ export class WeatherService {
     this.http
       .get<any>(`${this.baseUrl}?lat=${lat}&lon=${long}&units=metric&exclude=minutely&appid=${this.appid}`)
       .subscribe(result => {
-        let coordinates = JSON.stringify({ lat, long });
-        localStorage.setItem('coordinates', coordinates);
+        let coordinates: Coordinate = { latitude: lat, longitude: long };
+        localStorage.setItem('coordinates', JSON.stringify(coordinates));
         this.sendActualWeather(result);
       }, err => console.log(err));
   }

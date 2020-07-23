@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { WeatherService } from '../../services/weather.service';
-import { Place } from '../../models/place';
+import { Coordinate } from '../../models/coordinate';
 
 @Component({
   selector: 'app-panel',
@@ -16,7 +16,15 @@ export class PanelComponent implements OnInit, OnDestroy {
   dailyWeather: any[] = [];
   hourlyWeather: any[] = [];
   
-  constructor(public weatherService: WeatherService) { }
+  constructor(public weatherService: WeatherService) { 
+    if (!(localStorage.getItem('coordinates') && localStorage.getItem('placeName'))) {
+      // Valores por default
+      localStorage.setItem('coordinates', '{"latitude":6.24475,"longitude":-75.57483}');
+    }
+    
+    let coordinates: Coordinate = JSON.parse(localStorage.getItem('coordinates'));
+    this.weatherService.getActualWeather(coordinates.latitude, coordinates.longitude);
+  }
   
   ngOnInit(): void {
     this.subscription = this.weatherService.getWeather().subscribe(weather => { 
@@ -28,10 +36,6 @@ export class PanelComponent implements OnInit, OnDestroy {
         if (i % 4 == 0) this.hourlyWeather.push(weather.hourly[i]);
       } 
       
-      if (localStorage.getItem('coordinates')) {
-        let place: Place = JSON.parse(localStorage.getItem('coordinates'));
-        this.weatherService.getActualWeather(place.lat, place.long); 
-      }
     });
 
   }

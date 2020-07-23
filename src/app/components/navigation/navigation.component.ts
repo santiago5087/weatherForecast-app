@@ -18,7 +18,14 @@ export class NavigationComponent implements OnInit {
   filteredOptions: Place[] = [];
 
   constructor(private searchService: SearchService,
-    private weatherService: WeatherService) { }
+    private weatherService: WeatherService) { 
+      if (!(localStorage.getItem('placeName') && localStorage.getItem('coordinates'))) {
+        // Valores por default
+        localStorage.setItem('placeName', 'Medellín, Antioquia, Colombia');
+      }
+      
+      this.myControl.patchValue(localStorage.getItem('placeName'));
+    }
 
   ngOnInit() {
     this.subscription = this.myControl.valueChanges
@@ -30,6 +37,8 @@ export class NavigationComponent implements OnInit {
     this.searchService.search(filterName)
       .subscribe(
         res => {
+          localStorage.setItem('placeName', name);
+
           this.filteredOptions = res.features.map(feature => {
             let featuredPlace: Place = {
               name: feature.place_name,
