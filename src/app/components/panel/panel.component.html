@@ -1,4 +1,8 @@
 <div class="container">
+  <div *ngIf="!currentWeather" fxLayoutAlign="center center" style="width: 100%; margin-top: 200;">
+    <mat-spinner></mat-spinner>
+  </div>
+
   <div *ngIf="currentWeather" class="current-weather" fxLayout="column" fxLayoutAlign="center center">
     <div fxLayout ="row wrap" fxLayoutAlign="space-between center" class="current-info">
       <span fxFlex>
