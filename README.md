@@ -1,5 +1,12 @@
 # AngularWeatherApp
 
+You can access to the app at: https://weather-forecast-angular-app.netlify.app 
+
+This app consumes the following APIs:
+
+- https://docs.mapbox.com/api/ - To search places and their coordinates (cities, states, etc.)
+- https://openweathermap.org/api - To retrieve the weather forecast info
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.3.
 
 ## Development server
